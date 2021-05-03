@@ -60,3 +60,23 @@ def cria_baralho():
 cria_baralho()
 
 
+
+
+
+def extrai_naipe(string):
+    print(string)
+    if len(string) == 2:
+        so_naipe = string[1]
+    else:
+        so_naipe = string[2]
+    print(so_naipe)
+    return so_naipe
+
+def extrai_valor(string):
+    print(string)
+    if len(string) == 2:
+        so_naipe = string[0]
+    else:
+        so_naipe = string[0] + string[1]
+    print(so_naipe)
+    return so_naipe

@@ -39,7 +39,7 @@ def main():
     posicao = carta_no_baralho
 
 def cria_baralho():
-    baralho = []
+    baralho = [0]
     numeros = ['A', '2', '3','4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'] 
     naipe = ['♠','♥','♦','♣']
     
@@ -84,12 +84,11 @@ def lista_movimentos_possiveis(baralho, posicao):
     elif posicao == 1:
         if extrai_valor(baralho[1]) == extrai_valor(baralho[0]) or extrai_naipe(baralho[1]) == extrai_naipe(baralho[0]):
             print('Você tem 1 movimento possível, pode mover sua carta para a anterior') 
-            resposta = input('Para onde você deseja mover a carta? ')
-            if resposta != 0:
+            resposta = int(input('Para onde você deseja mover a carta? '))
+
+            while resposta != 0:
                 print('Movimento inválido')     
-                resposta = input('Para onde você deseja mover a carta? ') 
-            else:
-                return baralho_novo   
+                resposta = int(input('Para onde você deseja mover a carta? '))
         else:
             print(" Você não tem movimentos possíveis")
             return baralho
@@ -97,48 +96,45 @@ def lista_movimentos_possiveis(baralho, posicao):
     elif posicao == 2:
         if extrai_valor(baralho[2]) == extrai_valor(baralho[1]) or extrai_naipe(baralho[2]) == extrai_naipe(baralho[1]):
             print('Você tem 1 movimento possível, pode mover sua carta para a anterior') 
-            resposta = input('Para onde você deseja mover a carta? ')
-            if resposta != 1:
+            resposta = int(input('Para onde você deseja mover a carta? '))
+
+            while resposta != 1:
                 print('Movimento inválido')     
-                resposta = input('Para onde você deseja mover a carta? ')
-            else:
-                return baralho_novo   
+                resposta = int(input('Para onde você deseja mover a carta? '))
         else:
             print(" Você não tem movimentos possíveis")
             return baralho
     elif (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-1]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1])) and (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-3])):
         print('Você tem 2 movimentos possíveis, pode mover sua carta para a anterior ou para a terceira anterior')
-        resposta = input('Para onde você deseja mover a carta? ') 
-        if resposta != posicao - 1 or resposta != posicao - 3:
-                print('Movimento inválido')     
-                resposta = input('Para onde você deseja mover a carta? ')
-        else:
-            print(" Você não tem movimentos possíveis")
-            return baralho_novo    
+        resposta = int(input('Para onde você deseja mover a carta? '))
+
+        while resposta != posicao - 1 or resposta != posicao - 3:
+            print('Movimento inválido')     
+            resposta = int(input('Para onde você deseja mover a carta? '))
       
     elif (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-1]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1])):
         print('Você tem 1 movimento possível, pode mover sua carta para a anterior')
-        resposta = input('Para onde você deseja mover a carta? ') 
-        if resposta != posicao - 1:
-                print('Movimento inválido')     
-                resposta = input('Para onde você deseja mover a carta? ')
-        else:
-            print(" Você não tem movimentos possíveis")
-            return baralho_novo
+        resposta = int(input('Para onde você deseja mover a carta? '))
+
+        while resposta != posicao - 1 :
+            print('Movimento inválido')     
+            resposta = int(input('Para onde você deseja mover a carta? '))
 
     elif extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1]):
         print('Você tem 1 movimentos possível, pode mover sua carta para a terceira anterior')
-        resposta = input('Para onde você deseja mover a carta? ') 
-        if resposta != posicao - 3:
-                print('Movimento inválido')     
-                resposta = input('Para onde você deseja mover a carta? ')
-        else:
-            print(" Você não tem movimentos possíveis")
-            return baralho_novo
-        
+        resposta = int(input('Para onde você deseja mover a carta? '))
+
+        while resposta != posicao - 3:
+            print('Movimento inválido')     
+            resposta = int(input('Para onde você deseja mover a carta? '))                 
     else:
         print(" Você não tem movimentos possíveis")
         return baralho
+
+def empilha(baralho,posicao,resposta): 
+    baralho[resposta] = baralho[posicao]
+    del baralho[posicao]  
+    return baralho
 
 def possui_movimentos_possiveis(baralho):
     i = 0

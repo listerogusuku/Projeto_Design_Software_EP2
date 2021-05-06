@@ -22,13 +22,15 @@
 import random
 
 def main():
-    baralho = cria_baralho() 
+    baralho = cria_baralho()
     while possui_movimentos_possiveis(baralho):          
         a = 0
         while a < len(baralho):
             print('{0}. {1}'.format(a+1,baralho[a]))
             a += 1
+
         carta = int(input('Escolha uma carta: '))
+
         carta_no_baralho = baralho[carta-1]
         print('Sua carta é: {}'.format(carta_no_baralho))
         posicao = carta - 1 
@@ -37,11 +39,10 @@ def main():
         if lista_movimentos_possiveis(baralho, posicao) != []:
             resposta = int(input('Para onde você deseja mover a carta? '))
             emp = empilha(baralho, posicao, resposta-1)
-
-    #if possui_movimentos_possiveis(baralho) == False:
-    #    print('Você perdeu!')
-    #else:
-    #    print('Parabéns, você panhou!')
+    if len(baralho) == 1:
+        print('Parabéns, você panhou!')
+    else:
+        print("Que pena, você perdeu!")
 
 def cria_baralho():
     baralho = [0]
@@ -84,26 +85,25 @@ def extrai_valor(carta_no_baralho):
 
 def lista_movimentos_possiveis(baralho, posicao):
     if posicao == 0:
-        return 'Você não tem movimentos possíveis'
+        return[]
     elif posicao == 1:
         if extrai_valor(baralho[1]) == extrai_valor(baralho[0]) or extrai_naipe(baralho[1]) == extrai_naipe(baralho[0]):
-            print('Você tem 1 movimento possível: mova para a posição anterior')
             return[1]
         else:
-            return 'Você tem 1 movimento possível: mova para a posição anterior'
+            return[]
     elif posicao == 2:
         if extrai_valor(baralho[2]) == extrai_valor(baralho[1]) or extrai_naipe(baralho[2]) == extrai_naipe(baralho[1]):
-            return 'Você tem 1 movimento possível: mova para a posição anterior'
+            return[1]
         else:
-            return 'Você não tem movimentos possíveis'
+            return[] 
     elif (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-1]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1])) and (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-3])):
-        return 'Você tem 2 movimento possível: mova para a posição anterior ou para a terceira posição anterior'
+        return[1,3]
     elif (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-1]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1])):
-        return 'Você tem 1 movimento possível: mova para a posição anterior'
+        return[1]
     elif extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1]):
-        return 'Você tem 1 movimento possível: mova para a terceira posição anterior'
+        return[3]
     else:
-        return 'Você não tem movimentos possíveis'
+        return[]
 
 def empilha(baralho,posicao,resposta): 
     baralho[resposta] = baralho[posicao]
@@ -119,5 +119,4 @@ def possui_movimentos_possiveis(baralho):
             i+=1
     return False
 
-x = main()
-print(x)
+main()

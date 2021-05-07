@@ -26,18 +26,35 @@ def main():
     while possui_movimentos_possiveis(baralho):          
         a = 0
         while a < len(baralho):
-            print('{0}. {1}'.format(a+1,baralho[a]))
+            if extrai_naipe(baralho[a]) == '♥':
+                print('\033[1;97m{0}. \033[1;31m{1}'.format(a+1,baralho[a]))
+            if extrai_naipe(baralho[a]) == '♠':
+                print('\033[1;97m{0}. \033[1;32m{1}'.format(a+1,baralho[a]))
+            if extrai_naipe(baralho[a]) == '♦':
+                print('\033[1;97m{0}. \033[1;33m{1}'.format(a+1,baralho[a]))
+            if extrai_naipe(baralho[a]) == '♣':
+                print('\033[1;97m{0}. \033[1;34m{1}'.format(a+1,baralho[a]))
             a += 1
 
-        carta = int(input('Escolha uma carta: '))
+        carta = int(input('\033[1;97mEscolha uma carta: '))
 
         carta_no_baralho = baralho[carta-1]
         print('Sua carta é: {}'.format(carta_no_baralho))
         posicao = carta - 1 
-        print(lista_movimentos_possiveis(baralho,posicao))
 
+        if lista_movimentos_possiveis(baralho,posicao) == [1]:
+            print('Você tem 1 movimento possível: mover para a casa anterior!')
+            movimento = int(input('Para onde você deseja mover a carta? (1 anterior): '))
+        if lista_movimentos_possiveis(baralho,posicao) == []:
+            print('Você não tem movimentos possíveis, tente outra vez!')
+        if lista_movimentos_possiveis(baralho, posicao) == [3]:
+            print('Você tem 1 movimento possível: mover para a terceira casa anterior!')
+            movimento = int(input('Para onde você deseja mover a carta? (3 anterior): '))
+        if lista_movimentos_possiveis(baralho, posicao) == [1,3]:
+            print('Você tem 2 movimento possível: ou mover para a casa anterior ou para a terceira anterior!')
+            movimento = int(input('Para onde você deseja mover a carta? (1 ou 3 anterior): '))
         if lista_movimentos_possiveis(baralho, posicao) != []:
-            resposta = int(input('Para onde você deseja mover a carta? '))
+            resposta = carta - movimento
             emp = empilha(baralho, posicao, resposta-1)
     if len(baralho) == 1:
         print('Parabéns, você panhou!')
@@ -88,7 +105,7 @@ def lista_movimentos_possiveis(baralho, posicao):
         return[]
     elif posicao == 1:
         if extrai_valor(baralho[1]) == extrai_valor(baralho[0]) or extrai_naipe(baralho[1]) == extrai_naipe(baralho[0]):
-            return[1]
+            return[1] 
         else:
             return[]
     elif posicao == 2:
@@ -100,7 +117,7 @@ def lista_movimentos_possiveis(baralho, posicao):
         return[1,3]
     elif (extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-1]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1])):
         return[1]
-    elif extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-1]):
+    elif extrai_valor(baralho[posicao]) == extrai_valor(baralho[posicao-3]) or extrai_naipe(baralho[posicao]) == extrai_naipe(baralho[posicao-3]):
         return[3]
     else:
         return[]

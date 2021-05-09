@@ -1,13 +1,11 @@
-# EP | Exercício Programa: Paciência de Acordeão | Design de Software
+# EP | Exercício Programa: Paciência Acordeão | Design de Software
 # Equipe: Celina Vieira de Melo e Lister Ogusuku Ribeiro
-# Data: 05/05/2021
+# Data: 01/05/2021
 
-# Descrição:
-# Jogo paciência acordeão criado com a intenção de promover uma interatividade com o usuário.
 
-# Neste jogo foram implementadas todas as regras avançadas.
+#Neste jogo foram implementadas regras avançadas.
 
-# ============================
+#============================
 
 print('\nPaciência Acordeão\n==================\n\nSeja bem-vindo(a) ao jogo de Paciência Acordeão! O objetivo deste jogo é colocar todas as cartas em uma mesma pilha.\n\nExistem apenas dois movimentos possíveis:\n\n1. Empilhar uma carta sobre a carta imediatamente anterior;\n2. Empilhar uma carta sobre a terceira carta anterior.\n\nPara que um movimento possa ser realizado basta que uma das duas condições abaixo seja atendida:\n\n1. As duas cartas possuem o mesmo valor ou \n2. As duas cartas possuem o mesmo naipe.\nDesde que alguma das condições acima seja satisfeita, qualquer carta pode ser movimentada.\n')
 
